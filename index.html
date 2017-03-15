@@ -1,0 +1,222 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <title>Rest service</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+.hiddenRow {
+    padding: 0 !important;
+}
+
+.table {
+    border-bottom:0px !important;
+    font-size: 20px;
+}
+.table th, .table td {
+    border: 1px !important;
+}
+.table > tbody > tr > td {
+     vertical-align: middle;
+}
+.fixed-table-container {
+    border:0px !important;
+}
+.accord{
+  background-color:inherit;
+}
+.table-striped > tbody > tr:nth-child(4n+1) > td,
+.table-striped > tbody > tr:nth-child(4n+1) > th {
+   background-color: red;
+}
+.hid1 i.indicator{
+
+  font-size: 40px;
+}
+
+</style>
+    <script>
+    $(document).ready(function(){
+    $('.collapse').on('show.bs.collapse', function () {
+    $('.collapse.in').collapse('hide');
+
+
+// ---------------------------------
+    $('.accord1').on('shown.bs.collapse', function () {
+    $(".hid1 i.indicator").removeClass("glyphicon glyphicon-plus").addClass("glyphicon glyphicon-minus");
+});
+$('.accord1').on('hidden.bs.collapse', function () {
+    $(".hid1 i.indicator").removeClass("glyphicon glyphicon-minus").addClass("glyphicon glyphicon-plus");
+});
+// ---------------------------------
+});
+    });
+    function firstToUpperCase( str ) {
+    return str.substr(0, 1).toUpperCase() + str.substr(1);
+}
+$.ajax({
+  url: 'https://randomuser.me/api/?results=2&inc=picture,name,gender,login,phone,location',
+  dataType: 'json',
+  success: function(data) {
+    console.log(data);
+   var row = '<tr class="header">';
+        for (var i in data.results) {
+            row += '<tr id="' + i + '">';
+            row += '<td><img src="'+data.results[i].picture.thumbnail+'" class="img-circle" alt="Profile Pic" width="55" height="55"></td>';
+            row += '<td>' + firstToUpperCase(data.results[i].name.last)+ '</td>';
+            row += '<td>' +firstToUpperCase(data.results[i].name.first) + '</td>';
+             row += '<td>' + data.results[i].login.username + '</td>';
+               row += '<td>' + data.results[i].phone + '</td>';
+                   row += '<td>' + data.results[i].location.state + '</td>';
+                      row += '<td><i class="indicator glyphicon glyphicon glyphicon-plus"></i></td>';
+            row += '</tr>';
+        }
+        $(row).appendTo('#myTable');
+  }
+});
+
+
+</script>
+
+  </head>
+
+  <body>
+ <nav class="navbar navbar-inverse bg-inverse">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav">
+
+      <li><input href="#myModal" class="btn btn-primary navbar-btn" type="button" value="Show chart" data-toggle="modal"></input></li>
+    </ul>
+    <form class="navbar-form navbar-right">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search by first name">
+      </div>
+      <button type="submit"  class="btn btn-default glyphicon glyphicon-search"></button>
+    </form>
+  </div>
+</nav>
+<!-- ------------------------------------------------------------------------------------------------ -->
+
+
+<table class="table table-striped" id="myTable" style="border-collapse:collapse;">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Last</th>
+            <th>First</th>
+            <th>Username</th>
+            <th>Phone</th>
+            <th>Location</th>
+             <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr data-toggle="collapse" class="hid1" data-target=".demo1">
+            <td > <img src="pic.jpg" class="img-circle" alt="Cinque Terre" width="55" height="55"> </td>
+            <td>05 May 2013</td>
+            <td>Credit Account</td>
+            <td class="text-success">$150.00</td>
+            <td class="text-error"></td>
+            <td class="text-success">$150.00</td>
+             <td><i class="indicator glyphicon glyphicon glyphicon-plus"></i></td>
+        </tr>
+        <tr class="accord1">
+            <td  class="hiddenRow">
+                <div class="collapse demo1">Demo1</div>
+            </td>
+            <td class="hiddenRow">
+                <div class="collapse demo1">Demo1</div>
+            </td>
+            <td class="hiddenRow">
+                <div class="collapse demo1">Demo1</div>
+            </td>
+            <td class="hiddenRow">
+                <div class="collapse demo1">Demo1</div>
+            </td>
+            <td class="hiddenRow">
+                <div class="collapse demo1">Demo1</div>
+            </td>
+            <td class="hiddenRow">
+                <div class="collapse demo1">Demo1</div>
+            </td>
+        </tr>
+        <tr data-toggle="collapse" class="hid2" data-target="#demo2">
+            <td>2</td>
+            <td>05 May 2013</td>
+            <td>Credit Account</td>
+            <td class="text-success">$11.00</td>
+            <td class="text-error"></td>
+            <td class="text-success">$161.00</td>
+              <td><i class="indicator glyphicon glyphicon glyphicon-plus"></i></td>
+        </tr>
+        <tr class="accord2">
+            <td colspan="6" class="hiddenRow">
+                <div id="demo2" class="collapse">Demo2</div>
+            </td>
+        </tr>
+        <tr data-toggle="collapse" data-target="#demo3">
+            <td>3</td>
+            <td>05 May 2013</td>
+            <td>Credit Account</td>
+            <td class="text-success">$500.00</td>
+            <td class="text-error"></td>
+            <td class="text-success">$661.00</td>
+
+        </tr>
+        <tr>
+            <td colspan="6" class="hiddenRow">
+                <div id="demo3" class="collapse">Demo3</div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+    
+    <p id="demo"></p>
+    
+    
+
+
+<!-- --------------------------------------- -->
+
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+      <div class="modal-dialog">
+    <div class="modal-content">
+          <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
+      </div>
+          <div class="modal-body">
+          <div class="form-group">
+        <input class="form-control " type="text" placeholder="Mohsin">
+        </div>
+        <div class="form-group">
+        
+        <input class="form-control " type="text" placeholder="Irshad">
+        </div>
+        <div class="form-group">
+        <textarea rows="2" class="form-control" placeholder="CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan"></textarea>
+    
+        
+        </div>
+      </div>
+          <div class="modal-footer ">
+        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+      </div>
+        </div>
+    <!-- /.modal-content --> 
+  </div>
+      <!-- /.modal-dialog --> 
+    </div>
+
+
+  </body>
+  </html>
+
+
+
