@@ -1,0 +1,45 @@
+
+/*ОШИБКА#2{*/
+
+.accordion-toggle td:last-child:after {
+   font-family: FontAwesome;
+      content: "\f068";    /* adjust as needed, taken from bootstrap.css */
+    font-size: 50px;
+  }
+  .accordion-toggle.collapsed td:last-child:after {
+    content: "\f067";    /* adjust as needed, taken from bootstrap.css */
+  }
+/*}ОШИБКА#2*/
+
+    #chartdiv {
+      width : 600px;
+      height : 500px;
+    }
+    #profileName{
+      font-size: 35px;
+    }
+    .textBold{
+      font-weight: bold;
+    }
+    .hiddenRow {
+      padding: 0 !important;
+    }
+
+    .table {
+      border-bottom:0px !important;
+      font-size: 20px;
+    }
+    .table th, .table td {
+      border: 1px !important;
+    }
+    .table > tbody > tr > td {
+     vertical-align: middle;
+   }
+   .fixed-table-container {
+    border:0px !important;
+  }
+  .table-striped > tbody > tr:nth-child(4n+1) > td,
+  .table-striped > tbody > tr:nth-child(4n+1) > th {
+   background-color: #e2e1e1;
+ }
+

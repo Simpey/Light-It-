@@ -6,236 +6,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <!-- Numeric JS -->
-<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-<script src="https://www.amcharts.com/lib/3/pie.js"></script>
-<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
-<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
-<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
-    <style>
-    /*-----------------------------------OLD---------------------------------------------------------------------*/
-
-    #chartdiv {
-  width : 600px;
-  height : 500px;
-}
-    #profileName{
-      font-size: 35px;
-    }
-    .textBold{
-      font-weight: bold;
-    }
-.hiddenRow {
-    padding: 0 !important;
-}
-
-.table {
-    border-bottom:0px !important;
-    font-size: 20px;
-}
-.table th, .table td {
-    border: 1px !important;
-}
-.table > tbody > tr > td {
-     vertical-align: middle;
-}
-.fixed-table-container {
-    border:0px !important;
-}
-.accord{
-  background-color:inherit;
-}
-.table-striped > tbody > tr:nth-child(4n+1) > td,
-.table-striped > tbody > tr:nth-child(4n+1) > th {
-   background-color: #e2e1e1;
-}
-.hid1 i.indicator{
-  font-size: 40px;
-}
-
-</style>
-    <script>
-    function firstToUpperCase( str ) {
-    return str.substr(0, 1).toUpperCase() + str.substr(1);
-}
-
-    function dateWithoutTime( str ) {
-     var date=new Date(str);
-    return date.getUTCMonth() + 1+"/" + date.getUTCDate() + "/" + date.getUTCFullYear();
-}
-$.ajax({
-  url: 'https://randomuser.me/api/?results=8&inc=picture,name,gender,login,dob,email,cell,registered,phone,location',
-  dataType: 'json',
-  success: function(data) {
-    console.log(data);
-   var row = "";
-   var hiddenRowColor="";
-   var amountOfMales=0;
-   var amountOfFemales=0;
-        for (var i in data.results) {
-          if(i%2==0){
-   hiddenRowColor="#e2e1e1";
- }
-else{
-  hiddenRowColor="#f9f9f9";
-}
-if(data.results[i].gender=="male"){
-amountOfMales++;
-}
-else{
-amountOfFemales++;
-}
-            row += '<tr data-toggle="collapse" class="hid1" data-target=".hidData'+i+'" >';
-            row += '<td id="we"><img src="'+data.results[i].picture.thumbnail+'" class="img-circle" alt="Profile Pic" width="60" height="60"></td>';
-            row += '<td>' + firstToUpperCase(data.results[i].name.last)+ '</td>';
-            row += '<td>' +firstToUpperCase(data.results[i].name.first) + '</td>';
-             row += '<td>' + data.results[i].login.username + '</td>';
-               row += '<td>' + data.results[i].phone + '</td>';
-                   row += '<td>' + data.results[i].location.state + '</td>';
-                      row += '<td ><i class="indicator glyphicon glyphicon glyphicon-plus"></i></td>';
-            row += '</tr>';
-           row += '<tr class="accord2" style="background-color:'+hiddenRowColor+'">';
-            row += ' <td colspan="7" class="hiddenRow">';
-row += ' <div  class="collapse hidData'+i+'">';
-// -----------------------------------------------------------------
-                 row += '<div class="container-fluid">';
-                    row += '<table class="table" style="background-color:'+hiddenRowColor+'">';
-                       row += '<tr colspan="4"><span class="textBold" id="profileName">'+firstToUpperCase(data.results[i].name.first)+'<i class="fa fa-'+data.results[i].gender+' fa-fw" aria-hidden="true"></i></span></tr>';
-                        row += '<tr>';
-                        row += ' <td class="hiddenRow"><span class="textBold">Username </span>'+data.results[i].login.username+'</td>';
-                         row += ' <td class="hiddenRow"><span class="textBold">Address </span> '+data.results[i].location.street+'</td>';
-                          row += ' <td class="hiddenRow"><span class="textBold">Birthday </span> '+dateWithoutTime(data.results[i].dob)+'</td>';
-                          row += ' <td rowspan="3" class="hiddenRow"><img src="'+data.results[i].picture.large+'" class="img-circle" width="160" height="160"alt="Profile Pic Large" ></td>';
-                        row += ' </tr>';
-row += '<tr>';
-               row += ' <td class="hiddenRow"><span class="textBold">Registered </span> '+dateWithoutTime(data.results[i].registered)+'</td>';
-                         row += ' <td class="hiddenRow"><span class="textBold">City </span> '+data.results[i].location.city+'</td>';
-                row += ' <td class="hiddenRow"><span class="textBold">Phone </span> '+data.results[i].phone+'</td>';
-row += '</tr>';
-row += '<tr >';
-  row += ' <td class="hiddenRow"><span class="textBold">Email </span> '+data.results[i].email+'</td>';
-                         row += ' <td class="hiddenRow"><span class="textBold">Zip Code </span> '+data.results[i].location.postcode+'</td>';
-                row += ' <td class="hiddenRow"><span class="textBold">Cell </span> '+data.results[i].cell+'</td>';
-row += '</tr>';
-                                // -------------------------------------
-              row += '</table></div></div></td>';
-          row += '</tr>';
-              // -------------------------------------------------------
-        }
-        $(row).appendTo('#myTable');
-   var chart = AmCharts.makeChart( "chartdiv", {
-  "type": "pie",
-  "theme": "light",
-  "dataProvider": [ {
-    "gender": "male",
-    "amount": amountOfMales
-  }, {
-    "gender": "female",
-    "amount": amountOfFemales
-  } ],
-  "valueField": "amount",
-  "titleField": "gender",
-   "balloon":{
-   "fixedPosition":false
-  }
-} );
-
-
-  }
-});
-
-
-   
-
-
-
-// SEARCH
-function searchFunc() {
-  // Declare variables
-  var input, filter, table, tr, td, i;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("myTable");
-  tr = table.getElementsByClassName("hid1");
-
-  // Loop through all table rows, and hide those who don't match the search query
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[2];
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
-}
-// --------------------------------------------------------
-
-</script>
-
+    <script type="text/javascript" src="scripts.js"></script>
+    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="https://www.amcharts.com/lib/3/pie.js"></script>
+    <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script> 
+    <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
   </head>
-
   <body>
- <nav class="navbar navbar-inverse bg-inverse">
-  <div class="container-fluid">
-    <ul class="nav navbar-nav">
 
-      <li><input href="#myModal" class="btn btn-primary navbar-btn" type="button" value="Show chart" data-toggle="modal"></li>
-    </ul>
-    <form class="navbar-form navbar-right">
-      <div class="input-group">
-                    <input class="form-control" id="myInput" onkeyup="searchFunc()" placeholder="Search by first name" required>
-                    <span class="input-group-btn">
-                        <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
-                    </span>
-</div>
-    </form>
-  </div>
-</nav>
-<!-- ------------------------------------------------------------------------------------------------ -->
-
-<div class="container-fluid">
-<table class="table table-striped " id="myTable" style="border-collapse:collapse;">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Last</th>
-            <th>First</th>
-            <th>Username</th>
-            <th>Phone</th>
-            <th>Location</th>
-             <th></th>
-        </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
-
-</div>
-<!-- --------------------------------------- -->
-
-
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-      <div class="modal-dialog">
-    <div class="modal-content">
-          <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        <h4 class="modal-title custom_align text-center" id="Heading">Gender Users</h4>
-      </div>
-          <div class="modal-body">  
-       <div id="test" class="panel-body">
-    <div id="chartdiv"></div>
-      </div>
+   <nav class="navbar navbar-inverse bg-inverse">
+    <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li><input href="#chartModal" class="btn btn-primary navbar-btn" type="button" value="Show chart" data-toggle="modal"></li>
+      </ul>
+      <form class="navbar-form navbar-right">
+        <div class="input-group">
+          <input class="form-control" id="searchInput" onkeyup="searchFunc()" placeholder="Search by first name" required>
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+          </span>
         </div>
-  </div>
+      </form>
     </div>
+  </nav>
+
+  <div class="container-fluid">
+    <table class="table table-striped table-condensed" id="dataTable" style="border-collapse:collapse;">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Last</th>
+          <th>First</th>
+          <th>Username</th>
+          <th>Phone</th>
+          <th>Location</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="modal fade" id="chartModal" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+          <h4 class="modal-title custom_align text-center" id="Heading">Gender Users</h4>
+        </div>
+        <div class="modal-body">  
+         <div id="test" class="panel-body">
+          <div id="chartdiv"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-  </body>
-  </html>
+</body>
+</html>
 
 
 
