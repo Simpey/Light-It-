@@ -1,13 +1,4 @@
-// ОШИБКА1{
-  $(function() {
-    $('.collapse').on('show.bs.collapse', function () {
-      $('.collapse.in').collapse('hide');
-
-    });
-  });
-       // }ОШИБКА1
-
-       function firstToUpperCase( str ) {
+      function firstToUpperCase( str ) {
         return str.substr(0, 1).toUpperCase() + str.substr(1);
       }
 
@@ -50,7 +41,7 @@
         row += '<tr style="background-color:'+hiddenRowColor+'">';
         row += ' <td colspan="7" class="hiddenRow">';
         row += ' <div  class="accordian-body collapse clearfix" id="hiddenTable'+i+'">';
-        row += '<div class="container-fluid">';
+        row += '<div class="collapse-feature-list container-fluid">';
         row += '<table class="table" style="background-color:'+hiddenRowColor+'">';
         row += '<tr scope="row"><span class="textBold" id="profileName">'+firstToUpperCase(data.results[i].name.first)+'<i class="fa fa-'+data.results[i].gender+' fa-fw" aria-hidden="true"></i></span></tr>';
         row += '<tr>';
@@ -69,19 +60,26 @@
         row += ' <td class="hiddenRow"><span class="textBold">Zip Code </span> '+data.results[i].location.postcode+'</td>';
         row += ' <td class="hiddenRow"><span class="textBold">Cell </span> '+data.results[i].cell+'</td>';
         row += '</tr>';
-        row += '</table></div></div></td>';
-        row += '</tr>';
+        row += '</table></div>';
+        row += '</div></td></tr>';
       }
       $(row).appendTo('#dataTable');
+
+      $(function() {
+        $('.collapse').on('show.bs.collapse', function () {
+          $('.collapse.in').collapse('hide');
+
+        });
+      });
 
       var chart = AmCharts.makeChart( "chartdiv", {
         "type": "pie",
         "theme": "light",
         "dataProvider": [ {
-          "gender": "male",
+          "gender": "Male",
           "amount": amountOfMales
         }, {
-          "gender": "female",
+          "gender": "Female",
           "amount": amountOfFemales
         } ],
         "valueField": "amount",
@@ -91,25 +89,24 @@
        }
      } );
 
-
     }
   });
 
-function searchFunc() {
-  var input, filter, table, tr, td, i;
-  input = document.getElementById("searchInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("dataTable");
-  tr = table.getElementsByClassName("accordion-toggle");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[2];
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
+      function searchFunc() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("dataTable");
+        tr = table.getElementsByClassName("accordion-toggle");
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[2];
+          if (td) {
+            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }
+        }
       }
-    }
-  }
-}
 
