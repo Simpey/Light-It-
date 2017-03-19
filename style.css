@@ -1,42 +1,49 @@
-
 .accordion-toggle td:last-child:after {
-   font-family: FontAwesome;
-      content: "\f068"; 
-    font-size: 50px;
-  }
-  .accordion-toggle.collapsed td:last-child:after {
-    content: "\f067";   
-  }
+ font-family: FontAwesome;
+ content: "\f068"; 
+ font-size: 50px;
+}
 
-    #chartdiv {
-      width : 600px;
-      height : 500px;
-    }
-    #profileName{
-      font-size: 35px;
-    }
-    .textBold{
-      font-weight: bold;
-    }
-    .hiddenRow {
-      padding: 0 !important;
-    }
+.accordion-toggle.collapsed td:last-child:after {
+  content: "\f067";   
+}
 
-    .table {
-      border-bottom:0px !important;
-      font-size: 20px;
-    }
-    .table th, .table td {
-      border: 1px !important;
-    }
-    .table > tbody > tr > td {
-     vertical-align: middle;
-   }
-   .fixed-table-container {
-    border:0px !important;
-  }
-  .table-striped > tbody > tr:nth-child(4n+1) > td,
-  .table-striped > tbody > tr:nth-child(4n+1) > th {
-   background-color: #e2e1e1;
- }
+#chartdiv {
+  width : 600px;
+  height : 500px;
+}
+
+#profileName{
+  font-size: 35px;
+}
+
+.textBold{
+  font-weight: bold;
+}
+
+.hiddenRow {
+  padding: 0 !important;
+}
+
+.table {
+  border-bottom:0px !important;
+  font-size: 20px;
+}
+
+.table th, .table td {
+  border: 1px !important;
+}
+
+.table > tbody > tr > td {
+ vertical-align: middle;
+}
+
+.fixed-table-container {
+  border:0px !important;
+}
+
+.table-striped > tbody > tr:nth-child(4n+1) > td,
+.table-striped > tbody > tr:nth-child(4n+1) > th {
+ background-color: #e2e1e1;
+}
 
