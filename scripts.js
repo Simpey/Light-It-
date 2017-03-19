@@ -38,8 +38,8 @@
         else{
           amountOfFemales++;
         }
-        row += '<tr data-toggle="collapse" class="accordion-toggle" data-target="#hiddenTable'+i+'" >';
-        row += '<td ><img src="'+data.results[i].picture.thumbnail+'" class="img-circle" alt="Profile Pic" width="60" height="60"></td>';
+        row += '<tr data-toggle="collapse" class="accordion-toggle collapsed" data-target="#hiddenTable'+i+'" >';
+        row += '<td ><img src="'+data.results[i].picture.thumbnail+'" class="img-circle img-thumbnail" alt="Profile Pic" width="80" height="80"></td>';
         row += '<td>' + firstToUpperCase(data.results[i].name.last)+ '</td>';
         row += '<td>' +firstToUpperCase(data.results[i].name.first) + '</td>';
         row += '<td>' + data.results[i].login.username + '</td>';
@@ -52,12 +52,12 @@
         row += ' <div  class="accordian-body collapse clearfix" id="hiddenTable'+i+'">';
         row += '<div class="container-fluid">';
         row += '<table class="table" style="background-color:'+hiddenRowColor+'">';
-        row += '<tr colspan="4"><span class="textBold" id="profileName">'+firstToUpperCase(data.results[i].name.first)+'<i class="fa fa-'+data.results[i].gender+' fa-fw" aria-hidden="true"></i></span></tr>';
+        row += '<tr scope="row"><span class="textBold" id="profileName">'+firstToUpperCase(data.results[i].name.first)+'<i class="fa fa-'+data.results[i].gender+' fa-fw" aria-hidden="true"></i></span></tr>';
         row += '<tr>';
         row += ' <td class="hiddenRow"><span class="textBold">Username </span>'+data.results[i].login.username+'</td>';
         row += ' <td class="hiddenRow"><span class="textBold">Address </span> '+data.results[i].location.street+'</td>';
         row += ' <td class="hiddenRow"><span class="textBold">Birthday </span> '+dateWithoutTime(data.results[i].dob)+'</td>';
-        row += ' <td rowspan="3" class="hiddenRow"><img src="'+data.results[i].picture.large+'" class="img-circle" width="160" height="160"alt="Profile Pic Large" ></td>';
+        row += ' <td rowspan="3" class="hiddenRow"><img src="'+data.results[i].picture.large+'" class="img-circle img-thumbnail" width="160" height="160"alt="Profile Pic Large" ></td>';
         row += ' </tr>';
         row += '<tr>';
         row += ' <td class="hiddenRow"><span class="textBold">Registered </span> '+dateWithoutTime(data.results[i].registered)+'</td>';
@@ -69,12 +69,11 @@
         row += ' <td class="hiddenRow"><span class="textBold">Zip Code </span> '+data.results[i].location.postcode+'</td>';
         row += ' <td class="hiddenRow"><span class="textBold">Cell </span> '+data.results[i].cell+'</td>';
         row += '</tr>';
-
         row += '</table></div></div></td>';
         row += '</tr>';
-
       }
       $(row).appendTo('#dataTable');
+
       var chart = AmCharts.makeChart( "chartdiv", {
         "type": "pie",
         "theme": "light",
@@ -95,7 +94,6 @@
 
     }
   });
-
 
 function searchFunc() {
   var input, filter, table, tr, td, i;

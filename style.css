@@ -1,15 +1,12 @@
 
-/*ОШИБКА#2{*/
-
 .accordion-toggle td:last-child:after {
    font-family: FontAwesome;
-      content: "\f068";    /* adjust as needed, taken from bootstrap.css */
+      content: "\f068"; 
     font-size: 50px;
   }
   .accordion-toggle.collapsed td:last-child:after {
-    content: "\f067";    /* adjust as needed, taken from bootstrap.css */
+    content: "\f067";   
   }
-/*}ОШИБКА#2*/
 
     #chartdiv {
       width : 600px;
